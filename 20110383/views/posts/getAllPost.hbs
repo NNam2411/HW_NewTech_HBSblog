@@ -1,0 +1,77 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HomePage</title>
+    <style>
+      body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin:
+      0; padding: 0; } h1 { text-align: center; } .post { background-color:
+      #fff; border: 1px solid #ccc; border-radius: 5px; margin: 20px; padding:
+      10px; } .post h2 { margin-top: 0; } .post p { margin-bottom: 10px; } /*
+      public/styles/addPost.css */ #formPost { max-width: 600px; margin: 0 auto;
+      padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0
+      4px 8px rgba(0, 0, 0, 0.1); } #formPost h1 { font-size: 24px;
+      margin-bottom: 20px; } #formPost label { font-weight: bold; } #formPost
+      input[type="text"], #formPost textarea { width: 100%; padding: 8px;
+      margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+      #formPost textarea { height: 150px; } #formPost input[type="submit"] {
+      background-color: #007bff; color: #fff; padding: 10px 20px; border: none;
+      border-radius: 8px; font-weight: bold; cursor: pointer; transition:
+      background-color 0.3s; } #formPost input[type="submit"]:hover {
+      background-color: #0056b3; } /* ... (your existing CSS) ... */
+      .post-actions { display: flex; margin-top: 10px; } #delForm
+      .delete-button, .edit-button { display: inline-block; padding: 8px 16px;
+      margin-right: 10px; text-decoration: none; color: #fff; border-radius:
+      4px; font-weight: bold; } #delForm .delete-button { background-color:
+      #dc3545; } .edit-button { background-color: #007bff; } #delForm
+      .delete-button:hover, .edit-button:hover { opacity: 0.8; }
+
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to our Blog</h1>
+    <div id="formPost">
+      <h1>Add a New Post</h1>
+      <form action="/addPost" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required /><br />
+
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required /><br />
+
+        <label for="content">Content:</label><br />
+        <textarea
+          id="content"
+          name="content"
+          rows="4"
+          cols="50"
+          required
+        ></textarea><br />
+
+        <input type="submit" value="Add Post" />
+      </form>
+    </div>
+    {{#each posts}}
+      <div class="post">
+        <h2>{{this.title}}</h2>
+        <p>{{this.author}}</p>
+        <p>{{this.content}}</p>
+        <div class="post-actions">
+          <a
+            href="http://localhost:5000/editPost/{{this.id}}"
+            class="edit-button"
+          >Edit</a>
+          <form id="delForm" method="POST" action="/deletePost/{{this.id}}">
+            <button
+              class="delete-button"
+              type="submit"
+              onclick="return confirm('Are you sure you want to delete this post?')"
+            >Delete Post</button>
+          </form>
+        </div>
+      </div>
+    {{/each}}
+
+    <a href="http://localhost:5000/addPosts">Add New Post</a>
+  </body>
+</html>

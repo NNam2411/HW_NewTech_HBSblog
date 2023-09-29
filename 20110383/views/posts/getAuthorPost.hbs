@@ -1,0 +1,20 @@
+<!-- Trong file views/postsByAuthor.hbs -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Posts by {{author}}</title>
+  </head>
+  <body>
+
+    <h1>Posts by {{author}}</h1>
+    {{#each posts}}
+      <div class="post">
+        <h2>{{this.title}}</h2>
+        <p>{{this.author}}</p>
+        <p>{{this.content}}</p>
+      </div>
+    {{/each}}
+  </body>
+</html>
